@@ -24,9 +24,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # step for main/latest (docker only)
-      - name: Build and push latest docker image
-        if: success() && github.ref == 'refs/heads/main'
-        run: |
-          docker build . -t ghcr.io/minetest-go/go-cicd-template:latest
-          docker push ghcr.io/minetest-go/go-cicd-template:latest
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}

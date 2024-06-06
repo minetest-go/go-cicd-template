@@ -1,6 +1,8 @@
 
 github/go cicd template
 
+* goreleaser and docker sandbox
+
 ## Notes
 
 Version build:

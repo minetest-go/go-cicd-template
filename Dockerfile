@@ -3,7 +3,7 @@ ARG APP_VERSION=docker-dev
 COPY . /data
 WORKDIR /data
 RUN go test ./... && \
-	CGO_ENABLED=0 go build -ldflags="-X main.Version=${APP_VERSION}"
+	CGO_ENABLED=0 go build -ldflags="-X main.version=${APP_VERSION}"
 
 FROM alpine:3.20.0
 COPY --from=app /data/gh-cicd /
